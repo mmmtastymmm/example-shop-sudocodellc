@@ -58,9 +58,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  String _auth_state = "Not set";
-  String _idTokenState = "";
-  String _userChanges = "";
 
   void _incrementCounter() {
     setState(() {
