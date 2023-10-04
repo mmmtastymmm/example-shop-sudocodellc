@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "818967875128",
+    "project_id": "example-shop-sudocodellc",
+    "storage_bucket": "example-shop-sudocodellc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818967875128:android:af610130eaf9b4d7d960cd",
+        "android_client_info": {
+          "package_name": "com.sudocodellc.example_shop_sudocodellc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnQlErG6IJsP94yZV7x_JWbZakzRVEAng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
