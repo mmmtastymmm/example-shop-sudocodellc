@@ -1,3 +1,4 @@
+import 'package:example_shop_sudocodellc/screens/home_page.dart';
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _displayNameController = TextEditingController();
   String _issue = "";
 
   void _submitForm() async {
@@ -24,12 +26,20 @@ class _SignupScreenState extends State<SignupScreen> {
 
     final emailAddress = _emailController.text;
     final password = _passwordController.text;
+    final displayName = _displayNameController.text;
     String localIssue = "";
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
+
+      if (userCredential.user != null) {
+        await userCredential.user!.updateDisplayName(displayName);
+      }
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(HomeScreen.routeName, (route) => false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         localIssue = 'The password provided is too weak.';
@@ -59,6 +69,17 @@ class _SignupScreenState extends State<SignupScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
+                TextFormField(
+                  controller: _displayNameController,
+                  decoration: const InputDecoration(labelText: 'Display Name'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a display name.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 12),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,

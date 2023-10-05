@@ -2,6 +2,7 @@ import 'package:example_shop_sudocodellc/providers/shopping_results.dart';
 import 'package:example_shop_sudocodellc/screens/login_page.dart';
 import 'package:example_shop_sudocodellc/screens/signup_screen.dart';
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,29 +21,36 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     String result =
-        "Home with state: \"${Provider.of<ShoppingState>(context).state}\"";
+        "Home with state: \"${Provider.of<ShoppingState>(context).currentUser}\"";
+    String greeting =
+        "Welcome ${Provider.of<ShoppingState>(context).firstName} to the shop demo!";
+    User? currentUser = Provider.of<ShoppingState>(context).currentUser;
     final ButtonStyle style = TextButton.styleFrom(
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
     );
     return ShiftRightFixer(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Your Shop!"),
+          title: Text(greeting),
           actions: [
-            TextButton(
-              style: style,
-              onPressed: () {
-                Navigator.of(context).pushNamed(LoginScreen.routeName);
-              },
-              child: const Text("Log In"),
-            ),
-            TextButton(
-              style: style,
-              onPressed: () {
-                Navigator.of(context).pushNamed(SignupScreen.routeName);
-              },
-              child: const Text("Sign Up"),
-            ),
+            currentUser == null
+                ? TextButton(
+                    style: style,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(LoginScreen.routeName);
+                    },
+                    child: const Text("Log In"),
+                  )
+                : const SizedBox(),
+            currentUser == null
+                ? TextButton(
+                    style: style,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(SignupScreen.routeName);
+                    },
+                    child: const Text("Sign Up"),
+                  )
+                : const SizedBox(),
           ],
         ),
         body: Center(
@@ -51,8 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(result),
               ElevatedButton(
                 onPressed: () => {
-                  Provider.of<ShoppingState>(context, listen: false).update()
-                },
+                  print("Button pushed")},
                 child: const Text("Increment"),
               ),
             ],
