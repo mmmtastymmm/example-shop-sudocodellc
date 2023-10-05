@@ -2,8 +2,6 @@ import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
-
 class LoginScreen extends StatefulWidget {
   static const routeName = "/login";
 
@@ -31,8 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: emailAddress,
         password: password,
       );
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(HomeScreen.routeName, (route) => false);
+      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       String localIssue = "";
       if (e.code == 'user-not-found') {

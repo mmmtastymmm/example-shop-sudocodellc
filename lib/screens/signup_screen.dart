@@ -1,4 +1,3 @@
-import 'package:example_shop_sudocodellc/screens/home_page.dart';
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +33,11 @@ class _SignupScreenState extends State<SignupScreen> {
         email: emailAddress,
         password: password,
       );
-
       if (userCredential.user != null) {
         await userCredential.user!.updateDisplayName(displayName);
       }
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(HomeScreen.routeName, (route) => false);
+      Navigator.of(context).pop();
+      return;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         localIssue = 'The password provided is too weak.';
@@ -106,13 +104,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 20),
                 _issue.isEmpty
                     ? const SizedBox(
-                        height: 0,
-                        width: 0,
-                      )
+                  height: 0,
+                  width: 0,
+                )
                     : Text(
-                        _issue,
-                        style: const TextStyle(color: Colors.red),
-                      ),
+                  _issue,
+                  style: const TextStyle(color: Colors.red),
+                ),
                 const SizedBox(
                   height: 20,
                 ),

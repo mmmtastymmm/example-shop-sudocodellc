@@ -7,17 +7,31 @@ class ShoppingState extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   ShoppingState() {
+    _initializeListeners();
+  }
+
+  _initializeListeners() {
     _firebaseAuth.authStateChanges().listen((user) {
       _currentUser = user;
-      _updateUserRelatedValues();
+      updateUserRelatedValues();
       notifyListeners();
+    });
+
+    // Listener for user metadata changes
+    _firebaseAuth.userChanges().listen((user) {
+      if (user != null) {
+        _currentUser = user; // Update the user with the latest data
+        updateUserRelatedValues();
+        notifyListeners();
+      }
     });
   }
 
-  _updateUserRelatedValues() {
+  updateUserRelatedValues() {
     if (_currentUser != null && _currentUser?.displayName != null) {
       List<String> values = _currentUser?.displayName!.split(" ") ?? [""];
       firstName = values[0];
+      notifyListeners();
     }
   }
 

@@ -20,6 +20,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle signUpStyle = ElevatedButton.styleFrom(
+      foregroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context)
+          .colorScheme
+          .onPrimary, // text color for the sign-up button
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20), // round the button edges
+      ),
+    );
     String result =
         "Home with state: \"${Provider.of<ShoppingState>(context).currentUser}\"";
     String greeting =
@@ -35,20 +45,23 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             currentUser == null
                 ? TextButton(
-                    style: style,
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(LoginScreen.routeName);
-                    },
-                    child: const Text("Log In"),
-                  )
+              style: style,
+              onPressed: () {
+                Navigator.of(context).pushNamed(LoginScreen.routeName);
+              },
+              child: const Text("Log In"),
+            )
                 : const SizedBox(),
             currentUser == null
-                ? TextButton(
-                    style: style,
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(SignupScreen.routeName);
-                    },
-                    child: const Text("Sign Up"),
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      style: signUpStyle,
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(SignupScreen.routeName);
+                      },
+                      child: const Text("Sign Up"),
+                    ),
                   )
                 : const SizedBox(),
           ],
@@ -58,8 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(result),
               ElevatedButton(
-                onPressed: () => {
-                  print("Button pushed")},
+                onPressed: () => {print("Button pushed")},
                 child: const Text("Increment"),
               ),
             ],
