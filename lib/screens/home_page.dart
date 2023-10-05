@@ -1,5 +1,6 @@
 import 'package:example_shop_sudocodellc/providers/shopping_results.dart';
 import 'package:example_shop_sudocodellc/screens/login_page.dart';
+import 'package:example_shop_sudocodellc/screens/signup_screen.dart';
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             TextButton(
               style: style,
               onPressed: () {
-                Navigator.of(context).pushNamed(LoginScreen.routeName);
+                Navigator.of(context).pushNamed(SignupScreen.routeName);
               },
               child: const Text("Sign Up"),
             ),
