@@ -1,6 +1,7 @@
 import 'package:example_shop_sudocodellc/providers/shopping_results.dart';
 import 'package:example_shop_sudocodellc/screens/home_page.dart';
 import 'package:example_shop_sudocodellc/screens/login_page.dart';
+import 'package:example_shop_sudocodellc/screens/signup_screen.dart';
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
           HomeScreen.routeName: (context) {
             return const HomeScreen();
           },
+          SignupScreen.routeName: (context) {
+            return const SignupScreen();
+          }
         },
       ),
     );

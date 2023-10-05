@@ -1,10 +1,10 @@
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class SignupScreen extends StatelessWidget {
   static const routeName = "/signup";
 
-  const LoginScreen({super.key});
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
