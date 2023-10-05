@@ -18,6 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<void> _logOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle signUpStyle = ElevatedButton.styleFrom(
@@ -45,13 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             currentUser == null
                 ? TextButton(
-              style: style,
-              onPressed: () {
-                Navigator.of(context).pushNamed(LoginScreen.routeName);
-              },
-              child: const Text("Log In"),
-            )
-                : const SizedBox(),
+                    style: style,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(LoginScreen.routeName);
+                    },
+                    child: const Text("Log In"),
+                  )
+                : TextButton(
+                    style: style,
+                    onPressed: _logOut,
+                    child: const Text("Log Out"),
+                  ),
             currentUser == null
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
