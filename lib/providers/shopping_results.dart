@@ -94,8 +94,8 @@ class ShoppingState extends ChangeNotifier {
           final Map<String, dynamic>? data =
               doc.data() as Map<String, dynamic>?;
           final List<dynamic> cartItemsFromDb = data?['cartItems'] ?? [];
-          _cartItems =
-              cartItemsFromDb.map((item) => Product.fromJson(item)).toList();
+          _cartItems.addAll(
+              cartItemsFromDb.map((item) => Product.fromJson(item)).toList());
           notifyListeners();
         }
       }

@@ -35,6 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         await Provider.of<ShoppingState>(context, listen: false)
             .fetchCartItemsFromFirestore();
+        await Provider.of<ShoppingState>(context, listen: false)
+            .saveCartItemsToFirestore();
       } catch (e) {
         print(e);
       }

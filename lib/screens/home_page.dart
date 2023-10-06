@@ -25,37 +25,53 @@ class _HomeScreenState extends State<HomeScreen> {
   // 1. Sample list of products
   List<Product> sampleProducts = [
     Product(
-        name: 'Product 1',
-        price: 19.99,
-        imageUrl:
-            'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80'),
+      name: 'One Shoe',
+      price: 19.99,
+      imageUrl:
+          'https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2224&q=80',
+    ),
     Product(
-        name: 'Product 2',
-        price: 29.99,
-        imageUrl:
-            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'),
+      name: 'Two Shoes',
+      price: 19.99 * 2,
+      imageUrl:
+          'https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80',
+    ),
     Product(
-        name: 'Product 1',
-        price: 19.99,
-        imageUrl:
-            'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80'),
+      name: 'Red Shoe',
+      price: 19.99 + 1,
+      imageUrl:
+          'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    ),
     Product(
-        name: 'Product 2',
-        price: 29.99,
-        imageUrl:
-            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'),
+      name: 'Blue Shoe',
+      price: 19.99 + 2,
+      imageUrl:
+          'https://images.unsplash.com/photo-1521774971864-62e842046145?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+    ),
     Product(
-        name: 'Product 1',
-        price: 19.99,
-        imageUrl:
-            'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80'),
+      name: 'A rocket trip',
+      price: 2,
+      imageUrl:
+          'https://images.unsplash.com/photo-1541186877-bb5a745edde5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2187&q=80',
+    ),
     Product(
-        name: 'Product 2',
-        price: 29.99,
-        imageUrl:
-            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'),
-
-    // ... Add more sample products as needed
+      name: 'Anti-Gravity Camera',
+      price: 109.99,
+      imageUrl:
+          'https://images.unsplash.com/photo-1552168324-d612d77725e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80',
+    ),
+    Product(
+      name: 'Woke Chess',
+      price: 19.99 * 3,
+      imageUrl:
+          'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
+    ),
+    Product(
+      name: '6 Apples',
+      price: 19.99 + 5,
+      imageUrl:
+          'https://images.unsplash.com/photo-1576179635662-9d1983e97e1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGVzfGVufDB8fDB8fHwy&auto=format&fit=crop&w=500&q=60',
+    ),
   ];
 
   void _showCheckoutAlert(BuildContext context) {
@@ -208,11 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Column(
           children: [
-            Text(result),
-            ElevatedButton(
-              onPressed: () => {print("Button pushed")},
-              child: const Text("Increment"),
-            ),
+            // Text(result),
             // 2. Replace the Center widget with the GridView.builder
             Expanded(
               child: LayoutBuilder(
