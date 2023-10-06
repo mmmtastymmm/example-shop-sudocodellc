@@ -35,6 +35,10 @@ class ShoppingState extends ChangeNotifier {
     }
   }
 
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
   User? get currentUser => _currentUser;
 
 // Additional methods for sign in, sign out, etc. can also be added here
