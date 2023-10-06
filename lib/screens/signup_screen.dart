@@ -104,13 +104,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 20),
                 _issue.isEmpty
                     ? const SizedBox(
-                  height: 0,
-                  width: 0,
-                )
+                        height: 0,
+                        width: 0,
+                      )
                     : Text(
-                  _issue,
-                  style: const TextStyle(color: Colors.red),
-                ),
+                        _issue,
+                        style: const TextStyle(color: Colors.red),
+                      ),
                 const SizedBox(
                   height: 20,
                 ),

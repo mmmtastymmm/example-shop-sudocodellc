@@ -80,7 +80,8 @@ class UserProfileScreen extends StatelessWidget {
                     onPressed: () async {
                       await Provider.of<ShoppingState>(context, listen: false)
                           .signOut();
-
+                      Provider.of<ShoppingState>(context, listen: false)
+                          .clearCartForSignOut();
                       // Navigate to /home and clear all routes beneath it
                       Navigator.of(context).pop();
                     },

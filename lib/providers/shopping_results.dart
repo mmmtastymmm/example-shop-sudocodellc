@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
@@ -43,11 +44,19 @@ class ShoppingState extends ChangeNotifier {
 
   void addToCart(Product product) {
     _cartItems.add(product);
+    saveCartItemsToFirestore();
     notifyListeners();
   }
 
   void removeFromCart(Product product) {
     _cartItems.remove(product);
+    saveCartItemsToFirestore();
+    notifyListeners();
+  }
+
+  void clearCartForSignOut() {
+    _cartItems.clear();
+    saveCartItemsToFirestore();
     notifyListeners();
   }
 
@@ -59,4 +68,39 @@ class ShoppingState extends ChangeNotifier {
   List<Product> get cartItems => _cartItems;
 
   User? get currentUser => _currentUser;
+
+  final CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
+
+  Future<void> saveCartItemsToFirestore() async {
+    try {
+      if (_currentUser != null) {
+        final userDocRef = usersCollection.doc(_currentUser!.uid);
+        await userDocRef.set({
+          'cartItems': _cartItems.map((product) => product.toJson()).toList(),
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> fetchCartItemsFromFirestore() async {
+    try {
+      if (_currentUser != null) {
+        final userDocRef = usersCollection.doc(_currentUser!.uid);
+        final doc = await userDocRef.get();
+        if (doc.exists) {
+          final Map<String, dynamic>? data =
+              doc.data() as Map<String, dynamic>?;
+          final List<dynamic> cartItemsFromDb = data?['cartItems'] ?? [];
+          _cartItems =
+              cartItemsFromDb.map((item) => Product.fromJson(item)).toList();
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

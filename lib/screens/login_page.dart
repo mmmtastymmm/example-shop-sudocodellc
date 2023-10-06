@@ -1,6 +1,9 @@
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/shopping_results.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = "/login";
@@ -29,6 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
         email: emailAddress,
         password: password,
       );
+      try {
+        await Provider.of<ShoppingState>(context, listen: false)
+            .fetchCartItemsFromFirestore();
+      } catch (e) {
+        print(e);
+      }
+
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       String localIssue = "";

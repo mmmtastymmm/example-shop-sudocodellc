@@ -180,22 +180,22 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             currentUser == null
                 ? TextButton(
-              style: style,
-              onPressed: () {
-                Navigator.of(context).pushNamed(LoginScreen.routeName);
-              },
-              child: const Text("Log In"),
-            )
+                    style: style,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(LoginScreen.routeName);
+                    },
+                    child: const Text("Log In"),
+                  )
                 : TextButton(
-              style: style,
-              onPressed: () => Navigator.of(context)
-                  .pushNamed(UserProfileScreen.routeName),
-              child: const Text("User Profile"),
-            ),
+                    style: style,
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(UserProfileScreen.routeName),
+                    child: const Text("User Profile"),
+                  ),
             currentUser == null
                 ? Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
                       style: signUpStyle,
                       onPressed: () {
                         Navigator.of(context).pushNamed(SignupScreen.routeName);
@@ -219,9 +219,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (BuildContext context, BoxConstraints constraints) {
                   int crossAxisCount = constraints.maxWidth ~/
                       200; // Assuming each item is roughly 150 logical pixels wide
-                  if (crossAxisCount < 1)
+                  if (crossAxisCount < 1) {
                     crossAxisCount =
                         1; // Safety check, at least one item will be displayed
+                  }
 
                   return GridView.builder(
                     padding: const EdgeInsets.all(10),
@@ -232,11 +233,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                     ),
-                    itemBuilder: (ctx, index) => ProductButton(
-                      product: sampleProducts[index],
-                      onPressed: () {
-                        print('Product ${sampleProducts[index].name} tapped');
-                      },
+                    itemBuilder: (ctx, index) => Container(
+                      padding: const EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: ProductButton(
+                        product: sampleProducts[index],
+                        onPressed: () {
+                          print('Product ${sampleProducts[index].name} tapped');
+                        },
+                      ),
                     ),
                   );
                 },
