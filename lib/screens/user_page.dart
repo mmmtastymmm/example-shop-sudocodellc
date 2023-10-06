@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/shopping_results.dart';
@@ -47,7 +48,7 @@ class UserProfileScreen extends StatelessWidget {
                   // Display user's account creation date
                   if (currentUser.metadata.creationTime != null)
                     Text(
-                      "Account Created: ${currentUser.metadata.creationTime}",
+                      "Account Created: ${DateFormat.yMMMd().format(currentUser.metadata.creationTime!)}",
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),
