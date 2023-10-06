@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'https://images.unsplash.com/photo-1521774971864-62e842046145?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
     ),
     Product(
-      name: 'A rocket trip',
+      name: 'A Rocket Trip',
       price: 2,
       imageUrl:
           'https://images.unsplash.com/photo-1541186877-bb5a745edde5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2187&q=80',
