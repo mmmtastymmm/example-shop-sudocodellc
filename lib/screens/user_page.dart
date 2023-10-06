@@ -75,9 +75,7 @@ class UserProfileScreen extends StatelessWidget {
                         ? const Text("Email Verified")
                         : const Text("Send Verification Email"),
                   ),
-
                   const SizedBox(height: 20), // Spacer
-
                   ElevatedButton(
                     onPressed: () async {
                       await Provider.of<ShoppingState>(context, listen: false)
@@ -88,8 +86,8 @@ class UserProfileScreen extends StatelessWidget {
                     },
                     child: const Text("Logout"),
                   ),
-          ],
-        ),
+                ],
+              ),
       ),
     );
   }
