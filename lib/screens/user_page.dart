@@ -33,9 +33,7 @@ class UserProfileScreen extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-
                   const SizedBox(height: 20), // Spacer
-
                   // Display user's display name
                   if (currentUser.displayName != null)
                     Text(
@@ -55,6 +53,30 @@ class UserProfileScreen extends StatelessWidget {
                     ),
 
                   const SizedBox(height: 40), // Spacer
+                  ElevatedButton(
+                    onPressed: currentUser.emailVerified
+                        ? null
+                        : () async {
+                            await Provider.of<ShoppingState>(context,
+                                    listen: false)
+                                .sendEmailVerification();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Verification email sent!'),
+                              ),
+                            );
+                          },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: currentUser.emailVerified
+                          ? Colors.grey
+                          : null, // sets the background color to grey when the button is disabled
+                    ),
+                    child: currentUser.emailVerified
+                        ? const Text("Email Verified")
+                        : const Text("Send Verification Email"),
+                  ),
+
+                  const SizedBox(height: 20), // Spacer
 
                   ElevatedButton(
                     onPressed: () async {

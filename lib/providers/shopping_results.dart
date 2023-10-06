@@ -29,6 +29,13 @@ class ShoppingState extends ChangeNotifier {
     notifyListeners();
   }
 
-  User? get currentUser => _currentUser;
+  // Inside the ShoppingState class
 
+  Future<void> sendEmailVerification() async {
+    if (_currentUser != null && !_currentUser!.emailVerified) {
+      await _currentUser!.sendEmailVerification();
+    }
+  }
+
+  User? get currentUser => _currentUser;
 }
