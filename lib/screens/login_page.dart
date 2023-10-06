@@ -36,6 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
         localIssue = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
         localIssue = 'Wrong password provided for that user.';
+      } else if (e.code == "invalid-login-credentials") {
+        localIssue = "Invalid login provided";
       } else {
         localIssue = "Error: ${e.message}";
       }

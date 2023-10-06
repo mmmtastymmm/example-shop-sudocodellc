@@ -1,6 +1,7 @@
 import 'package:example_shop_sudocodellc/providers/shopping_results.dart';
 import 'package:example_shop_sudocodellc/screens/login_page.dart';
 import 'package:example_shop_sudocodellc/screens/signup_screen.dart';
+import 'package:example_shop_sudocodellc/screens/user_page.dart';
 import 'package:example_shop_sudocodellc/widgets/shift_right_fixer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<void> _logOut() async {
-    await FirebaseAuth.instance.signOut();
+  String _getNameFromUser(User? user) {
+    if (user != null && user.displayName != null) {
+      List<String> values = user.displayName!.split(" ");
+      return "${values[0]} ";
+    }
+    return "";
   }
 
   @override
@@ -37,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String result =
         "Home with state: \"${Provider.of<ShoppingState>(context).currentUser}\"";
     String greeting =
-        "Welcome ${Provider.of<ShoppingState>(context).firstName} to the shop demo!";
+        "Welcome ${_getNameFromUser(Provider.of<ShoppingState>(context).currentUser)}to the shop demo!";
     User? currentUser = Provider.of<ShoppingState>(context).currentUser;
     final ButtonStyle style = TextButton.styleFrom(
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -56,9 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Text("Log In"),
                   )
                 : TextButton(
-                    style: style,
-                    onPressed: _logOut,
-                    child: const Text("Log Out"),
+              style: style,
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(UserProfileScreen.routeName),
+                    child: const Text("User Profile"),
                   ),
             currentUser == null
                 ? Padding(

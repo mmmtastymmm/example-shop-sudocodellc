@@ -1,4 +1,3 @@
-import 'package:example_shop_sudocodellc/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,34 +7,65 @@ import '../providers/shopping_results.dart';
 class UserProfileScreen extends StatelessWidget {
   static const routeName = "/user-profile";
 
+  const UserProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     User? currentUser = Provider.of<ShoppingState>(context).currentUser;
-    String firstName = Provider.of<ShoppingState>(context).firstName;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('User Profile'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // ... [rest of your user details widgets]
+        child: currentUser == null
+            ? const Text(
+                "User not logged in",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Display user's email
+                  if (currentUser.email != null)
+                    Text(
+                      "Email: ${currentUser.email}",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
 
-            ElevatedButton(
-              onPressed: () async {
-                await Provider.of<ShoppingState>(context, listen: false)
-                    .signOut();
+                  const SizedBox(height: 20), // Spacer
 
-                // Navigate to /home and clear all routes beneath it
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  (route) => false,
-                );
-              },
-              child: const Text("Logout"),
-            ),
+                  // Display user's display name
+                  if (currentUser.displayName != null)
+                    Text(
+                      "Display Name: ${currentUser.displayName}",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+
+                  const SizedBox(height: 20), // Spacer
+
+                  // Display user's account creation date
+                  if (currentUser.metadata.creationTime != null)
+                    Text(
+                      "Account Created: ${currentUser.metadata.creationTime}",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+
+                  const SizedBox(height: 40), // Spacer
+
+                  ElevatedButton(
+                    onPressed: () async {
+                      await Provider.of<ShoppingState>(context, listen: false)
+                          .signOut();
+
+                      // Navigate to /home and clear all routes beneath it
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Logout"),
+                  ),
           ],
         ),
       ),
