@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   int crossAxisCount = constraints.maxWidth ~/
-                      200; // Assuming each item is roughly 150 logical pixels wide
+                      300; // Assuming each item is roughly 150 logical pixels wide
                   if (crossAxisCount < 1) {
                     crossAxisCount =
                         1; // Safety check, at least one item will be displayed
