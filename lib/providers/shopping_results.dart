@@ -8,7 +8,7 @@ class ShoppingState extends ChangeNotifier {
   User? _currentUser;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  final List<Product> _cartItems = []; // List to hold cart items
+  List<Product> _cartItems = []; // List to hold cart items
 
   ShoppingState() {
     _initializeListeners();
@@ -94,8 +94,9 @@ class ShoppingState extends ChangeNotifier {
           final Map<String, dynamic>? data =
               doc.data() as Map<String, dynamic>?;
           final List<dynamic> cartItemsFromDb = data?['cartItems'] ?? [];
-          _cartItems.addAll(
-              cartItemsFromDb.map((item) => Product.fromJson(item)).toList());
+          List<Product> otherItems =
+              cartItemsFromDb.map((item) => Product.fromJson(item)).toList();
+          _cartItems = otherItems;
           notifyListeners();
         }
       }

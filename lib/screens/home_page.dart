@@ -93,6 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (Provider.of<ShoppingState>(context).cartItems.isEmpty) {
+      Provider.of<ShoppingState>(context, listen: false)
+          .fetchCartItemsFromFirestore();
+    }
     final ButtonStyle signUpStyle = ElevatedButton.styleFrom(
       foregroundColor: Theme.of(context).colorScheme.primary,
       backgroundColor: Theme.of(context)
@@ -118,29 +122,29 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             currentUser == null
                 ? TextButton(
-                    style: style,
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(LoginScreen.routeName);
-                    },
-                    child: const Text("Log In"),
-                  )
+              style: style,
+              onPressed: () {
+                Navigator.of(context).pushNamed(LoginScreen.routeName);
+              },
+              child: const Text("Log In"),
+            )
                 : TextButton(
-                    style: style,
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed(UserProfileScreen.routeName),
-                    child: const Text("User Profile"),
-                  ),
+              style: style,
+              onPressed: () => Navigator.of(context)
+                  .pushNamed(UserProfileScreen.routeName),
+              child: const Text("User Profile"),
+            ),
             currentUser == null
                 ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      style: signUpStyle,
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(SignupScreen.routeName);
-                      },
-                      child: const Text("Sign Up"),
-                    ),
-                  )
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: signUpStyle,
+                onPressed: () {
+                  Navigator.of(context).pushNamed(SignupScreen.routeName);
+                },
+                child: const Text("Sign Up"),
+              ),
+            )
                 : const SizedBox(),
           ],
         ),
@@ -155,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       300; // Assuming each item is roughly 150 logical pixels wide
                   if (crossAxisCount < 1) {
                     crossAxisCount =
-                        1; // Safety check, at least one item will be displayed
+                    1; // Safety check, at least one item will be displayed
                   }
 
                   return GridView.builder(
