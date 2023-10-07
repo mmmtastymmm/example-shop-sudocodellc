@@ -7,18 +7,26 @@ class Product {
   final String name;
   final double price;
   final String imageUrl;
+  final String description; // Added description field here
 
-  Product({required this.name, required this.price, required this.imageUrl});
+  Product(
+      {required this.name,
+      required this.price,
+      required this.imageUrl,
+      required this.description // Constructor argument for description
+      });
 
   Product.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         price = json['price'].toDouble(),
-        imageUrl = json['imageUrl'];
+        imageUrl = json['imageUrl'],
+        description = json['description']; // Extracting description from JSON
 
   Map<String, dynamic> toJson() => {
         'name': name,
         'price': price,
         'imageUrl': imageUrl,
+        'description': description, // Adding description to JSON output
       };
 }
 

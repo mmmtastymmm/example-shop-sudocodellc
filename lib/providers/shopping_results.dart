@@ -8,7 +8,7 @@ class ShoppingState extends ChangeNotifier {
   User? _currentUser;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  List<Product> _cartItems = []; // List to hold cart items
+  final List<Product> _cartItems = []; // List to hold cart items
 
   ShoppingState() {
     _initializeListeners();
