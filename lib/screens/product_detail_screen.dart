@@ -1,5 +1,8 @@
+import 'package:example_shop_sudocodellc/widgets/floating_shop_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/shopping_results.dart';
 import '../widgets/product_button.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -16,11 +19,10 @@ class ProductDetailScreen extends StatelessWidget {
         title: Text(product.name),
       ),
       body: SingleChildScrollView(
-        // Ensures the screen is scrollable if the content overflows
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 300, // You can adjust this based on your preference
+              height: 300,
               width: double.infinity,
               child: Image.network(
                 product.imageUrl,
@@ -51,13 +53,23 @@ class ProductDetailScreen extends StatelessWidget {
                 textAlign: TextAlign.justify,
                 style: const TextStyle(
                   fontSize: 18,
-                  height: 1.5, // Adjusts line height for better readability
+                  height: 1.5,
                 ),
               ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Here's where you use Provider to add the product to cart
+                Provider.of<ShoppingState>(context, listen: false)
+                    .addToCart(product);
+              },
+              child: const Text('Add to Cart'),
             ),
           ],
         ),
       ),
+      floatingActionButton: makeShopButton(context),
     );
   }
 }
